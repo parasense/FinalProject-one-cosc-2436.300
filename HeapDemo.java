@@ -18,43 +18,41 @@ public class HeapDemo {
     public static void main(String[] args) {
 
         // Anonymous comparator of Integers.
-        Comparator<Integer> MyComparator = Integer::compare;
+        Comparator<Integer> myComparator = Integer::compare;
         
         // Instantiate the Heap with the comparator.
-        Heap<Integer> MyHeap = new Heap<>(MyComparator);
+        Heap<Integer> myHeap = new Heap<>(myComparator);
 
         // Generate the Random numbers to give the Heap.
-        int[] InputNumbers = GenRandomNumbers();
+        int[] inputNumbers = genRandomNumbers();
         
         // Give numbers to the Heap, and print.
-        //System.out.println("Adding numbers:");
-        for (int k : InputNumbers){
+        for (int k : inputNumbers){
             System.out.printf("%d ", k);
-            MyHeap.add(k);
+            myHeap.add(k);
         }
         System.out.println();
         
         // Remove numbers.
-        //System.out.println("\nRemoving numbers:");
-        for (int k : MyHeap.DeepCopy()){
-            System.out.printf("%d ",MyHeap.remove());
+        for (int k : myHeap.deepCopy()){
+            System.out.printf("%d ",myHeap.remove());
         }
         System.out.println();
     }
     
     // Generate 20 random RandomNumbers of 0 ~ 99.
-    public static int[] GenRandomNumbers(){
+    public static int[] genRandomNumbers(){
         final int min=0;
         final int max=99;
         final int limit=20;
-        int[] RandomNumbers = new int[limit];
+        int[] randomNumbers = new int[limit];
         for (int i = 0 ; i < limit ; i++){
             // Casting to int because Math.random gives a double
-            RandomNumbers[i] = (int) (Math.random() * max + min);
+            randomNumbers[i] = (int) (Math.random() * max + min);
         }
-        return RandomNumbers;
         
-        // XXX - consistent test numbers
+        // XXX - consistent numbers for testing
         //return new int[]{69,25,55,78,31,63,96,92,52,78,50,80,35,15,33,27,29,40,13,88};
+        return randomNumbers;
     }
 }
