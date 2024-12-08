@@ -51,8 +51,6 @@ public class HeapDemo {
             randomNumbers[i] = (int) (Math.random() * max + min);
         }
         
-        // XXX - consistent numbers for testing
-        //return new int[]{69,25,55,78,31,63,96,92,52,78,50,80,35,15,33,27,29,40,13,88};
         return randomNumbers;
     }
 }

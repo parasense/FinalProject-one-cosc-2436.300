@@ -1,17 +1,3 @@
-/*
- * Final Project
- * 
- * Jon Disnard <jdisnard1@collin.edu>
- * COSC-2436.003
- * Professor Dimitrios Sellountos
- * December 8th 2024
- *
- * Product Version: Apache NetBeans IDE 23
- * Java: 21.0.4; OpenJDK 64-Bit Server VM 21.0.4+2
- * Runtime: OpenJDK Runtime Environment 21.0.4+2
- * System: Linux version 6.8.9-100.fc38.x86_64 running on amd64; UTF-8; en_US (nb)
- */
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -37,7 +23,7 @@ public class Heap<T> {
         }
 
         T headNode = getValue(0);
-        T tailNode = arrayHeap.remove(lastIndex()); // not recursion
+        T tailNode = arrayHeap.remove(getLastIndex());
 
         if (!arrayHeap.isEmpty()) {
             setValue(0, tailNode);
@@ -48,8 +34,8 @@ public class Heap<T> {
     }
 
     private void upSift() {
-        int index = lastIndex();
-        int parentIndex = parentIndex(index);
+        int index = getLastIndex();
+        int parentIndex = getParentIndex(index);
 
         while (index != 0)
         {
@@ -67,10 +53,10 @@ public class Heap<T> {
                 
             } else { 
                 
-                //  Otherwise swap the parentIndex node.
+                //  Otherwise swap the parent node.
                 swapValues(index, parentIndex);
                 index = parentIndex;
-                parentIndex = parentIndex(index);
+                parentIndex = getParentIndex(index);
                 
             }
         }
@@ -81,15 +67,15 @@ public class Heap<T> {
         T workNode = getValue(index);
         int size = arrayHeap.size();
         
-        while (leftChildIndex(index) < size) {
+        while (getLeftChildIndex(index) < size) {
             
-            int leftChildIndex = leftChildIndex(index);
-            int rightChildIndex = rightChildIndex(index);
+            int leftChildIndex = getLeftChildIndex(index);
+            int rightChildIndex = getRightChildIndex(index);
             int minChildIndex = leftChildIndex;
             
             if (rightChildIndex < size){
                 
-                // Find the smaller child
+                // Find the smaller child node
                 if
                 (
                     arrayHeapComparator.compare(
@@ -106,7 +92,7 @@ public class Heap<T> {
                 }
             }
 
-            // Stop if workNode is less-than-or-equal MinChildIndex.
+            // Stop if workNode is less-than-or-equal minChildIndex.
             if
             (
                 arrayHeapComparator.compare(
@@ -125,7 +111,7 @@ public class Heap<T> {
                 
             }
             
-            // Reset the index for next iteration
+            // Reset the Index for next iteration
             index = minChildIndex;
         }
 
@@ -136,23 +122,23 @@ public class Heap<T> {
         return new ArrayList<>(arrayHeap);
     }
     
-    // Returns parentIndex node's index possition.
-    private Integer parentIndex(Integer idx){
+    // Returns parent node's Index possition.
+    private Integer getParentIndex(Integer idx){
         return (idx -1) / 2;
     }
     
-    // Returns left child node index possition.
-    private Integer leftChildIndex(Integer idx){
+    // Returns left child node Index possition.
+    private Integer getLeftChildIndex(Integer idx){
         return (2 * idx) + 1;
     }
     
-    // Returns right child node index possition.
-    private Integer rightChildIndex(Integer idx){
+    // Returns right child node Index possition.
+    private Integer getRightChildIndex(Integer idx){
         return (2 * idx) + 2;
     }
     
-    // Returns last array node index possition.
-    private int lastIndex(){
+    // Returns last array node Index possition.
+    private int getLastIndex(){
         return (arrayHeap.size() - 1);
     }
     
@@ -161,15 +147,15 @@ public class Heap<T> {
         return arrayHeap.get(idx);
     }
     
-    // Set the node value of a given index possition.
+    // Set the node value of a given Index possition.
     private void setValue(Integer idx, T node){
         arrayHeap.set(idx, node);
     }
     
-    // Exchange node values.
+    // Exchange nodes.
     private void swapValues(Integer idxA, Integer idxB){
         T NodeA = this.arrayHeap.get(idxA);
-        arrayHeap.set(idxA, arrayHeap.get(idxA));
+        arrayHeap.set(idxA, arrayHeap.get(idxB));
         arrayHeap.set(idxB, NodeA);
     }
 }
