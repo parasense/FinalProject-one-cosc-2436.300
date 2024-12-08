@@ -1,6 +1,6 @@
 /*
  * Final Project
- * 
+ *
  * Jon Disnard <jdisnard1@collin.edu>
  * COSC-2436.003
  * Professor Dimitrios Sellountos
@@ -15,31 +15,31 @@
 import java.util.Comparator;
 public class HeapDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         // Anonymous comparator of Integers.
         Comparator<Integer> myComparator = Integer::compare;
-        
+
         // Instantiate the Heap with the comparator.
         Heap<Integer> myHeap = new Heap<>(myComparator);
 
         // Generate the Random numbers to give the Heap.
         int[] inputNumbers = genRandomNumbers();
-        
+
         // Give numbers to the Heap, and print.
         for (int k : inputNumbers){
             System.out.printf("%d ", k);
             myHeap.add(k);
         }
         System.out.println();
-        
+
         // Remove numbers.
         for (int k : myHeap.deepCopy()){
             System.out.printf("%d ",myHeap.remove());
         }
         System.out.println();
     }
-    
+
     // Generate 20 random RandomNumbers of 0 ~ 99.
     public static int[] genRandomNumbers(){
         final int min=0;
@@ -50,7 +50,7 @@ public class HeapDemo {
             // Casting to int because Math.random gives a double
             randomNumbers[i] = (int) (Math.random() * max + min);
         }
-        
+
         return randomNumbers;
     }
 }

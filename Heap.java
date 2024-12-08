@@ -1,3 +1,17 @@
+/*
+ * Final Project
+ *
+ * Jon Disnard <jdisnard1@collin.edu>
+ * COSC-2436.003
+ * Professor Dimitrios Sellountos
+ * December 8th 2024
+ *
+ * Product Version: Apache NetBeans IDE 23
+ * Java: 21.0.4; OpenJDK 64-Bit Server VM 21.0.4+2
+ * Runtime: OpenJDK Runtime Environment 21.0.4+2
+ * System: Linux version 6.8.9-100.fc38.x86_64 running on amd64; UTF-8; en_US (nb)
+ */
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -39,7 +53,7 @@ public class Heap<T> {
 
         while (index != 0)
         {
-            
+
             // Find the smaller node.
             if
             (
@@ -48,16 +62,16 @@ public class Heap<T> {
                     getValue(parentIndex)
                 ) >= 0
             ){
-                
+
                 break;
-                
+
             } else { 
-                
+
                 //  Otherwise swap the parent node.
                 swapValues(index, parentIndex);
                 index = parentIndex;
                 parentIndex = getParentIndex(index);
-                
+
             }
         }
     }
@@ -66,15 +80,15 @@ public class Heap<T> {
         int index = 0;
         T workNode = getValue(index);
         int size = arrayHeap.size();
-        
+
         while (getLeftChildIndex(index) < size) {
-            
+
             int leftChildIndex = getLeftChildIndex(index);
             int rightChildIndex = getRightChildIndex(index);
             int minChildIndex = leftChildIndex;
-            
+
             if (rightChildIndex < size){
-                
+
                 // Find the smaller child node
                 if
                 (
@@ -83,11 +97,11 @@ public class Heap<T> {
                         getValue(leftChildIndex)
                     ) < 0
                 ){
-                    
+
                     minChildIndex = rightChildIndex;
-                    
+
                 } else {
-                    
+
                     minChildIndex = leftChildIndex;
                 }
             }
@@ -101,16 +115,16 @@ public class Heap<T> {
                 ) <= 0
             )
             {
-                
+
                 break;
-                
+
             } else {
-            
+
                 //  Otherwise swap the smaller node.
                 swapValues(index, minChildIndex);
-                
+
             }
-            
+
             // Reset the Index for next iteration
             index = minChildIndex;
         }
@@ -121,37 +135,37 @@ public class Heap<T> {
     public ArrayList<T> deepCopy() {
         return new ArrayList<>(arrayHeap);
     }
-    
+
     // Returns parent node's Index possition.
     private Integer getParentIndex(Integer idx){
         return (idx -1) / 2;
     }
-    
+
     // Returns left child node Index possition.
     private Integer getLeftChildIndex(Integer idx){
         return (2 * idx) + 1;
     }
-    
+
     // Returns right child node Index possition.
     private Integer getRightChildIndex(Integer idx){
         return (2 * idx) + 2;
     }
-    
+
     // Returns last array node Index possition.
     private int getLastIndex(){
         return (arrayHeap.size() - 1);
     }
-    
+
     // Return the value of a given node.
     private T getValue(Integer idx){
         return arrayHeap.get(idx);
     }
-    
+
     // Set the node value of a given Index possition.
     private void setValue(Integer idx, T node){
         arrayHeap.set(idx, node);
     }
-    
+
     // Exchange nodes.
     private void swapValues(Integer idxA, Integer idxB){
         T NodeA = this.arrayHeap.get(idxA);
